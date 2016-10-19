@@ -1,11 +1,10 @@
 var express = require('express');
+var app = express();
 var bodyParser= require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
-var Question = require('./models/Question');
 var app = express();
 var passport = require('passport');
-var User = require('./models/Users');
 var req = require('request');
 
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -47,13 +46,14 @@ var BearerStrategy = require('passport-http-bearer').Strategy;
 // storage.add('Puerta', 'Door');
 // storage.add('Pollo', 'Chicken');
 // storage.add('Tonto', 'Silly');
+// const express = require('express');
+// const app = express();
 
-var app = express();
-app.use('/', express.static('build'));
 
-app.get('/items/', function(request, response) {
-	response.json(storage.items);
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html')
 });
+
 
 app.post('/items', bodyParser, function(request, response) {
 	if (!('name' in request.body)) {
@@ -119,23 +119,20 @@ app.post('/items', bodyParser, function(request, response) {
 // 			return callback(err);
 // 		}
 
-		app.listen(config.PORT, function() {
-			console.log('Listening on localhost:' + config.PORT);
-			if (callback) {
-				callback();
-			}
-		});
-	});
-};
+// Load the http module to create an http server.
+var http = require('http');
 
-if (require.main === module) {
-	runServer(function(err) {
-		if (err) {
-			console.error(err);
-		}
-	});
-};
+// Configure our HTTP server to respond with Hello World to all requests.
+var server = http.createServer(function (request, response) {
+  response.writeHead(200, {"Content-Type": "text/plain"});
+  response.end("Hello World\n");
+});
 
+// Listen on port 8000, IP defaults to 127.0.0.1
+server.listen(3000);
+
+// Put a friendly message on the terminal
+console.log("Server running at http://127.0.0.1:8000/");
 /*Google Strategy*/
 
 //STEP 1
@@ -223,4 +220,3 @@ passport.use(new BearerStrategy(
 //  });
 
 exports.app = app;
-exports.runServer = runServer;

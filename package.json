@@ -2,7 +2,7 @@
   "name": "space-repetition",
   "version": "1.0.0",
   "description": "Full Stack App",
-  "main": "client/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha--compilers js:babel-register test/**/*.js*",
     "mkdir": "mkdir -p build",
@@ -19,8 +19,7 @@
     "dev": "npm run watch & npm run serve"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yolixtly/space-repetition.git"
+
   },
   "keywords": [],
   "author": "",
