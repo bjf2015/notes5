@@ -28605,6 +28605,7 @@
 	"use strict";
 	
 	var React = __webpack_require__(166);
+	var FormInput = __webpack_require__(267);
 	
 	var Main = React.createClass({
 		displayName: "Main",
@@ -28613,7 +28614,7 @@
 			return React.createElement(
 				"div",
 				null,
-				thi.props.children
+				this.props.children
 			);
 		}
 	});
@@ -28626,10 +28627,77 @@
 
 	"use strict";
 	
-	var react = __webpack_require__(166);
 	var React = __webpack_require__(166);
 	var actions = __webpack_require__(261);
 	var connect = __webpack_require__(237).connect;
+	var store = __webpack_require__(264);
+	
+	var FormInput = React.createClass({
+		displayName: "FormInput",
+	
+		onFormSubmit: function onFormSubmit(e) {
+			e.preventDefault();
+			var primary = this.refs.Primary.value;
+			this.props.dispatch(actions.saveDataSuccess(primary));
+			primary = "";
+			// var SecondarySource = this.refs.SecondarySource.value;
+			// this.props.dispatch(actions.saveDataSuccess(SecondarySource));
+	
+			// var Source = this.refs.Source.value;
+			// this.props.dispatch(actions.saveDataSuccess(Source));
+	
+			// var Concept = this.refs.Concept.value;
+			// this.props.dispatch(actions.saveDataSuccess(Concept));
+	
+			// var Effectiveness = this.refs.Effectiveness.value;
+			// this.props.dispatch(actions.saveDataSuccess(Effectiveness));
+		},
+	
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "form-wrapper" },
+				React.createElement(
+					"form",
+					{ onSubmit: this.onFormSubmit, className: "input-group" },
+					"Primary: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Primary" }),
+					"Secondary: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Secondary" }),
+					"Source: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Source" }),
+					"Concept: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Concept" }),
+					"Effectiveness: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Effectiveness" }),
+					React.createElement(
+						"span",
+						{ className: "input-group-btn" },
+						React.createElement(
+							"button",
+							{ type: "submit", className: "btn btn-secondary" },
+							"Submit"
+						)
+					)
+				)
+			);
+		}
+	});
+	
+	var mapStateToProps = function mapStateToProps(state, props) {
+		return {
+			data: state.list
+		};
+	};
+	
+	var Container = connect(mapStateToProps)(FormInput);
+	
+	module.exports = Container;
 
 /***/ },
 /* 261 */
@@ -29190,7 +29258,17 @@
 	// var update = require('react-addons-update');
 	
 	var initialState = {
-		list: []
+		list: [{
+			primary: String,
+			secondary: String,
+			source: String,
+			concept: String,
+			effectiveness: String,
+			date: Date,
+			starttime: String,
+			endtime: String,
+			duration: Number
+		}]
 	};
 	
 	var reducer = function reducer(state, action) {
@@ -29210,6 +29288,84 @@
 	};
 	
 	module.exports = reducer;
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(166);
+	var actions = __webpack_require__(261);
+	var connect = __webpack_require__(237).connect;
+	var store = __webpack_require__(264);
+	
+	var FormInput = React.createClass({
+		displayName: "FormInput",
+	
+		onFormSubmit: function onFormSubmit(e) {
+			e.preventDefault();
+			var primary = this.refs.Primary.value;
+			this.props.dispatch(actions.saveDataSuccess(primary));
+			primary = "";
+			// var SecondarySource = this.refs.SecondarySource.value;
+			// this.props.dispatch(actions.saveDataSuccess(SecondarySource));
+	
+			// var Source = this.refs.Source.value;
+			// this.props.dispatch(actions.saveDataSuccess(Source));
+	
+			// var Concept = this.refs.Concept.value;
+			// this.props.dispatch(actions.saveDataSuccess(Concept));
+	
+			// var Effectiveness = this.refs.Effectiveness.value;
+			// this.props.dispatch(actions.saveDataSuccess(Effectiveness));
+		},
+	
+		render: function render() {
+			return React.createElement(
+				"div",
+				{ className: "form-wrapper" },
+				React.createElement(
+					"form",
+					{ onSubmit: this.onFormSubmit, className: "input-group" },
+					"Primary: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Primary" }),
+					"Secondary: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Secondary" }),
+					"Source: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Source" }),
+					"Concept: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Concept" }),
+					"Effectiveness: ",
+					React.createElement("input", { placeholder: "Enter a new Task",
+						className: "form-control", ref: "Effectiveness" }),
+					React.createElement(
+						"span",
+						{ className: "input-group-btn" },
+						React.createElement(
+							"button",
+							{ type: "submit", className: "btn btn-secondary" },
+							"Submit"
+						)
+					)
+				)
+			);
+		}
+	});
+	
+	var mapStateToProps = function mapStateToProps(state, props) {
+		return {
+			data: state.list
+		};
+	};
+	
+	var Container = connect(mapStateToProps)(FormInput);
+	
+	module.exports = Container;
 
 /***/ }
 /******/ ]);

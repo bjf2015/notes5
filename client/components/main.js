@@ -1,11 +1,11 @@
 var React = require("react");
-
+var FormInput = require("./formInput");
 
 var Main = React.createClass({
 		render: function() {
 		return (
 			<div>
-			{thi.props.children}
+			{this.props.children}
 
 			</div>
 

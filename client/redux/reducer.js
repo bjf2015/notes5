@@ -2,7 +2,17 @@ var actions = require("./action");
 // var update = require('react-addons-update');
 
 var initialState = {
-	list:[]
+	list:[{
+		primary:  String,
+	  	secondary: String,
+		source: String,
+		concept: String,
+	  	effectiveness: String,
+	  	date: Date,
+	  	starttime: String,
+	  	endtime: String,
+	  	duration: Number
+	}]
 };
 
 var reducer = function(state, action) {
