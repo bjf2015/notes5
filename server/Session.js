@@ -1,16 +1,16 @@
 var mongoose = require('mongoose');
 
 var SessionSchema = new mongoose.Schema({
-  _id:  [{type: String, unique: true}],
+  // _id:  [{type: String, unique: true}],
 	primary:  String,
-  secondary: String;
+  secondary: String,
 	source: String,
 	concept: String,
   effectiveness: String,
   date: Date,
   starttime: String,
   endtime: String,
-  duration: Integer
+  duration: Number
 	// bucket: { type: String, default: 'z'}
 });
 
