@@ -1,10 +1,18 @@
 require('isomorphic-fetch');
 
 var SAVE_DATA_SUCCESS = "SAVE_DATA_SUCCESS";
-var saveDataSuccess = function(data) {
+var saveDataSuccess = function(primary, secondary, source, concept, effectiveness, date, starttime, endtime, duration) {
   return {
     type: SAVE_DATA_SUCCESS,
-    data: data
+    primary: primary,
+  	secondary: secondary,
+	source: source, 
+	concept: concept,
+  	effectiveness: effectiveness,
+  	date: date,  	
+  	starttime: starttime,
+  	endtime: endtime,
+  	duration: duration
   };
 };
 
@@ -16,7 +24,7 @@ var dataError = function(error) {
   };
 };
 
-var saveList = function(list) {
+var saveList = function(primary, secondary, source, concept, effectiveness, date, starttime, endtime, duration) {
   return function(dispatch) {
     var url = 'http://localhost:8080/app';
     return fetch(url, {
@@ -24,7 +32,17 @@ var saveList = function(list) {
       headers: {
         "Content-type": "application/json"
       },
-      body: JSON.stringify({list})
+      body: JSON.stringify({
+	    primary: primary,
+	  	secondary: secondary,
+		source: source, 
+		concept: concept,
+	  	effectiveness: effectiveness,
+	  	date: date,  	
+	  	starttime: starttime,
+	  	endtime: endtime,
+	  	duration: duration
+      })
     }).then(function(response) {
       if (response.status < 200 || response.status >= 300) {
         var error = new Error(response.statusText)
@@ -33,10 +51,10 @@ var saveList = function(list) {
       }
       return response.json();
     })
-    .then(function(data) {
-     console.log("POST DATA: ", data);
+    .then(function() {
+     console.log("POST DATA: ", primary, secondary, source, concept, effectiveness, date, starttime, endtime, duration);
      return dispatch(
-      saveDataSuccess(data)
+      saveDataSuccess(primary, secondary, source, concept, effectiveness, date, starttime, endtime, duration)
       );
    })
     .catch(function(error) {

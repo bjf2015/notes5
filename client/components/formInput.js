@@ -3,43 +3,46 @@ var actions = require("../redux/action");
 var connect = require("react-redux").connect;
 var store = require("../redux/store");
 
-
+// var obj = {};
 var FormInput = React.createClass({
-	onFormSubmit: function(e) {
+	onListSubmit: function(e) {
 		e.preventDefault();
-		var primary = this.refs.Primary.value;
-		this.props.dispatch(actions.saveDataSuccess(primary));
-			primary = "";
-		// var SecondarySource = this.refs.SecondarySource.value;
-		// this.props.dispatch(actions.saveDataSuccess(SecondarySource));
 
-		// var Source = this.refs.Source.value;
-		// this.props.dispatch(actions.saveDataSuccess(Source));
+		var pValue = this.refs.Primary.value;
+		// this.props.dispatch(actions.saveList(pValue));
 
-		// var Concept = this.refs.Concept.value;
-		// this.props.dispatch(actions.saveDataSuccess(Concept));
+		var secValue = this.refs.Secondary.value;
+		// this.props.dispatch(actions.saveList(secValue));
 
-		// var Effectiveness = this.refs.Effectiveness.value;
-		// this.props.dispatch(actions.saveDataSuccess(Effectiveness));
+		var souValue = this.refs.Source.value;
+		// this.props.dispatch(actions.saveList(souValue));
+
+		var conValue = this.refs.Concept.value;
+		// this.props.dispatch(actions.saveList(conValue));
+
+		var effValue = this.refs.Effectiveness.value;
+		// obj = Object.assign({}, pValue, secValue, souValue, conValue, effValue);
+		// console.log(obj)
+		this.props.dispatch(actions.saveList(pValue, secValue, souValue, conValue, effValue));
 	},
 
 	render: function() {
 		return (
 			<div className="form-wrapper">
-			<form onSubmit={this.onFormSubmit} className='input-group'>
-				Primary: <input placeholder='Enter a new Task' 
+			<form onSubmit={this.onListSubmit} className='input-group'>
+				<input placeholder='Enter a new Task' 
 				className="form-control" ref="Primary" />
 
-				Secondary: <input placeholder='Enter a new Task' 
+				<input placeholder='Enter a new Task' 
 				className="form-control" ref="Secondary" />
 
-				Source: <input placeholder='Enter a new Task' 
+				<input placeholder='Enter a new Task' 
 				className="form-control" ref="Source" />
 
-				Concept: <input placeholder='Enter a new Task' 
+				<input placeholder='Enter a new Task' 
 				className="form-control" ref="Concept" />
 
-				Effectiveness: <input placeholder='Enter a new Task' 
+				<input placeholder='Enter a new Task' 
 				className="form-control" ref="Effectiveness" />	
 
 				<span className="input-group-btn">
@@ -51,13 +54,13 @@ var FormInput = React.createClass({
 	}
 });
 
-var mapStateToProps = function(state, props) {
-	return {
-		data: state.list
-	}
-};
+// var mapStateToProps = function(state, props) {
+// 	return {
+// 		data: state.list
+// 	}
+// };
 
-var Container = connect(mapStateToProps)(FormInput);
+var Container = connect()(FormInput);
 
 module.exports = Container;
 
